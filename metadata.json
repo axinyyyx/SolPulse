@@ -1,0 +1,6 @@
+{
+  "name": "SolPulse — Micro-Bounty & Proof-of-Skill on Solana",
+  "description": "Decentralized micro-bounty marketplace and proof-of-skill protocol on Solana Devnet with instant judge demo wallet and on-chain verification.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
