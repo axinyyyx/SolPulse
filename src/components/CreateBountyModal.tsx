@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Bounty, BountyCategory, BountyDifficulty, WalletState } from '../types';
+import { generateSplTokenMint } from '../utils/bountyLogic';
 import { X, Plus, AlertCircle, Sparkles } from 'lucide-react';
 
 interface CreateBountyModalProps {
@@ -78,11 +79,12 @@ export const CreateBountyModal: React.FC<CreateBountyModalProps> = ({
       description: description.trim(),
       requirements: requirements.length > 0 ? requirements : ['Deliver working, tested implementation', 'Provide documentation in README'],
       deliverables: deliverables.trim() || 'GitHub repository or PR link with test suite.',
-      creatorAddress: wallet.address || 'JudgeCreator111111111111111111111111111111',
+      creatorAddress: wallet.address || 'BhXaWsyfVcfJRdpuBQ53scQfoyCuAvnRzM78eaAf2iAt',
       createdAt: new Date().toISOString().slice(0, 10),
       deadlineDays: 7,
       tags: tags.length > 0 ? tags : ['Solana', category.split(' ')[0]],
       submissionsCount: 0,
+      splTokenMint: generateSplTokenMint(),
     };
 
     onCreateBounty(newBounty);

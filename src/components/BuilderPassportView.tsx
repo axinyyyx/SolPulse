@@ -23,7 +23,8 @@ export const BuilderPassportView: React.FC<BuilderPassportViewProps> = ({
   );
 
   const handleShare = () => {
-    const url = window.location.href;
+    const addressParam = wallet.address || builderProfile.address;
+    const url = `https://solpulse-rs.vercel.app/?passport=${addressParam}`;
     navigator.clipboard.writeText(url);
     setCopiedLink(true);
     setTimeout(() => setCopiedLink(false), 2000);

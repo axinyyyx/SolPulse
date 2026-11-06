@@ -1,12 +1,22 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { calculateBuilderLevel, filterBounties, isValidUrl, calculateProtocolStats, INITIAL_BOUNTIES } from './bountyLogic';
+import { PublicKey } from '@solana/web3.js';
+import {
+  calculateBuilderLevel,
+  filterBounties,
+  isValidUrl,
+  calculateProtocolStats,
+  INITIAL_BOUNTIES,
+  INITIAL_PROJECT_SUBMISSIONS,
+  INITIAL_SPL_TOKENS,
+  generateSplTokenMint,
+} from './bountyLogic';
 import { shortenAddress, solToLamports, lamportsToSol, formatSol } from './solana';
 
 test('shortenAddress properly truncates long public keys', () => {
-  const address = '9xKy18MvQz81Tp2YqR8sW76P10vL8291M41Xy99Q5555';
+  const address = 'BhXaWsyfVcfJRdpuBQ53scQfoyCuAvnRzM78eaAf2iAt';
   const shortened = shortenAddress(address, 4);
-  assert.equal(shortened, '9xKy...5555');
+  assert.equal(shortened, 'BhXa...2iAt');
   
   assert.equal(shortenAddress(''), '');
   assert.equal(shortenAddress('short'), 'short');
@@ -68,3 +78,25 @@ test('calculateProtocolStats computes volume and counts', () => {
   assert.equal(stats.totalBounties, 6);
   assert.ok(stats.totalSolVolume > 1.5);
 });
+
+test('all Solana addresses and SPL mints are valid 32-byte Base58 PublicKeys', () => {
+  for (const b of INITIAL_BOUNTIES) {
+    assert.doesNotThrow(() => new PublicKey(b.creatorAddress), `Invalid creatorAddress: ${b.creatorAddress}`);
+    if (b.splTokenMint) {
+      assert.doesNotThrow(() => new PublicKey(b.splTokenMint!), `Invalid splTokenMint: ${b.splTokenMint}`);
+    }
+  }
+  for (const s of INITIAL_PROJECT_SUBMISSIONS) {
+    assert.doesNotThrow(() => new PublicKey(s.builderAddress), `Invalid builderAddress: ${s.builderAddress}`);
+    if (s.splTokenMint) {
+      assert.doesNotThrow(() => new PublicKey(s.splTokenMint!), `Invalid submission splTokenMint: ${s.splTokenMint}`);
+    }
+  }
+  for (const t of INITIAL_SPL_TOKENS) {
+    assert.doesNotThrow(() => new PublicKey(t.mintAddress), `Invalid mintAddress: ${t.mintAddress}`);
+    assert.doesNotThrow(() => new PublicKey(t.recipientAddress), `Invalid recipientAddress: ${t.recipientAddress}`);
+  }
+  const generatedMint = generateSplTokenMint();
+  assert.doesNotThrow(() => new PublicKey(generatedMint), `Invalid generatedMint: ${generatedMint}`);
+});
+

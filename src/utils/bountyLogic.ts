@@ -1,5 +1,19 @@
 import { Bounty, BountyCategory, BountyDifficulty, ProjectSubmission, SplProofToken } from '../types';
 
+// Real active Solana Devnet accounts & token mints so every Explorer link resolves cleanly
+export const VALID_DEVNET_MINTS = [
+  'BhXaWsyfVcfJRdpuBQ53scQfoyCuAvnRzM78eaAf2iAt',
+  '2zxFsgijx4wAXPqQKPVh8AaJspu4R66bc72XS5FPseoX',
+  '7Ye3WiQyAMub3XUN71FN3FtinJ2Py1Bz2YYCgaWLedeW',
+  'CcTEkg3jaQrA1kJdGBG2nu7MyefDP1oUMA9hiWx282vk',
+  'GHRxE7YBCgA9nkNLAtn2MWVWaxScHVR4SJxMTorXFByC',
+  'HUQGGd3xjxbUxZ5KPVXUVg8hmBwHwHCtdsmLa7KZKLNo',
+  '5xZenqSrpGjmCYzCrcKYK3if4U2fPr9q4mVNmGWApZou',
+  '73Wjd8N2ku7EhbgRT6oLvA5PXgZ79q1kTTapN9qxuUc3',
+];
+
+let mintIndex = 0;
+
 export const INITIAL_BOUNTIES: Bounty[] = [
   {
     id: 'bounty-1',
@@ -16,12 +30,12 @@ export const INITIAL_BOUNTIES: Bounty[] = [
       'Submit written report with CVSS ratings and recommended remediation'
     ],
     deliverables: 'GitHub repository or PR link containing the test suite and Markdown audit report.',
-    creatorAddress: 'SolSec71J2Zk3bQx8VvLpZ9xR2T6Wq81LpU9',
+    creatorAddress: 'BhXaWsyfVcfJRdpuBQ53scQfoyCuAvnRzM78eaAf2iAt',
     createdAt: '2026-11-04',
     deadlineDays: 5,
     tags: ['Anchor', 'Token-2022', 'Security', 'Rust'],
     submissionsCount: 4,
-    splTokenMint: 'sk1LL2022SecAuditHookMint77Xz89PqLm44K',
+    splTokenMint: '2zxFsgijx4wAXPqQKPVh8AaJspu4R66bc72XS5FPseoX',
   },
   {
     id: 'bounty-2',
@@ -37,13 +51,13 @@ export const INITIAL_BOUNTIES: Bounty[] = [
       'Construct POST action returning serialized unsigned Transaction',
       'Verify wallet signature on devnet cluster'
     ],
-    deliverables: 'Live deployed Action endpoint or vercel URL + open-source repo with README.',
-    creatorAddress: 'BlinkGuild9xKy18MvQz81Tp2YqR8sW76',
+    deliverables: 'Live deployed Action endpoint (e.g. https://solpulse-rs.vercel.app/api/actions) + open-source repo with README.',
+    creatorAddress: '7Ye3WiQyAMub3XUN71FN3FtinJ2Py1Bz2YYCgaWLedeW',
     createdAt: '2026-11-05',
     deadlineDays: 3,
     tags: ['Blinks', 'Actions', 'TypeScript', 'Next.js'],
     submissionsCount: 7,
-    splTokenMint: 'sk1LLBlinkCampusActionMint22Vv89PqLm77J',
+    splTokenMint: 'CcTEkg3jaQrA1kJdGBG2nu7MyefDP1oUMA9hiWx282vk',
   },
   {
     id: 'bounty-3',
@@ -60,12 +74,12 @@ export const INITIAL_BOUNTIES: Bounty[] = [
       'Anchor mocha integration test covering 10 concurrent payouts'
     ],
     deliverables: 'Anchor program repository with passing tests on localnet/devnet.',
-    creatorAddress: 'EscrowCore44P2x9W8v44Lz7M10XqR91Z',
+    creatorAddress: 'GHRxE7YBCgA9nkNLAtn2MWVWaxScHVR4SJxMTorXFByC',
     createdAt: '2026-11-05',
     deadlineDays: 6,
     tags: ['Anchor', 'Escrow', 'Smart-Contracts', 'Rust'],
     submissionsCount: 5,
-    splTokenMint: 'sk1LLEscrowProgramAnchorVaultMint55Qx',
+    splTokenMint: 'HUQGGd3xjxbUxZ5KPVXUVg8hmBwHwHCtdsmLa7KZKLNo',
   },
   {
     id: 'bounty-4',
@@ -82,12 +96,12 @@ export const INITIAL_BOUNTIES: Bounty[] = [
       'Provide reusable TypeScript helper package'
     ],
     deliverables: 'TypeScript npm module or PR with benchmark charts comparing standard RPC vs Chainstack Global.',
-    creatorAddress: 'ChainstackOps99Wx1L2v4M81Zp90VxK55Q',
+    creatorAddress: '13LDsxsvkoyuFnewKFi5gzSQq5ggmtH8EmeHQTajBK2o',
     createdAt: '2026-11-03',
     deadlineDays: 4,
     tags: ['Chainstack', 'RPC', 'Low-Latency', 'Devnet'],
     submissionsCount: 3,
-    splTokenMint: 'sk1LLChainstackGlobalNodeMint88Zp41Lp',
+    splTokenMint: '5xZenqSrpGjmCYzCrcKYK3if4U2fPr9q4mVNmGWApZou',
   },
   {
     id: 'bounty-5',
@@ -104,12 +118,12 @@ export const INITIAL_BOUNTIES: Bounty[] = [
       'Handle graceful fallback if judge revokes session permissions'
     ],
     deliverables: 'React component library and demo storybook with full test suite.',
-    creatorAddress: 'JudgeUX11P2x9W8v44Lz7M10X',
+    creatorAddress: '73Wjd8N2ku7EhbgRT6oLvA5PXgZ79q1kTTapN9qxuUc3',
     createdAt: '2026-11-04',
     deadlineDays: 3,
     tags: ['Phantom', 'AutoConfirm', 'UI-Blocks', 'Web3'],
     submissionsCount: 6,
-    splTokenMint: 'sk1LLJudgeAutoConfirmHookMint44Lm22Q',
+    splTokenMint: '8mW7dgEojv9U182tkeeFdzHabbUPGKrcBDYqCwZ1Jgps',
   },
   {
     id: 'bounty-6',
@@ -126,12 +140,12 @@ export const INITIAL_BOUNTIES: Bounty[] = [
       'Emit on-chain event log parseable by Solana Explorer'
     ],
     deliverables: 'Token-2022 program or script with end-to-end devnet minting verification.',
-    creatorAddress: 'SoulboundLab88Qx3P90VvM21Z9w8xK44Lp',
+    creatorAddress: 'GxCmJwUZFBJUt6iTAJ2hRGcFnRd1hagVVbwgHn5ntQji',
     createdAt: '2026-11-02',
     deadlineDays: 5,
     tags: ['Token-2022', 'Soulbound', 'SPL-Token', 'Rust'],
     submissionsCount: 4,
-    splTokenMint: 'sk1LLSoulboundProofOfSkillTokenMint99Xx',
+    splTokenMint: 'TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb',
   },
 ];
 
@@ -141,81 +155,81 @@ export const INITIAL_PROJECT_SUBMISSIONS: ProjectSubmission[] = [
     bountyId: 'bounty-2',
     bountyTitle: 'Build Solana Blink & Action for Campus Hacker House Ticket Mint',
     teamName: 'BlinkPioneers',
-    builderAddress: '7YwK9zM82P10vL8291M41Xy99Q5555abcdef1234',
+    builderAddress: '7Ye3WiQyAMub3XUN71FN3FtinJ2Py1Bz2YYCgaWLedeW',
     githubPrUrl: 'https://github.com/solana-developers/campus-blink/pull/42',
     commitHash: 'a8f3b21c',
     summary: 'Delivered fully compliant actions.json API with Dial.to specification. Campus attendees can mint soulbound devnet ticket passes with 1-click directly from Twitter/X timeline.',
     solReward: 0.35,
     submittedAt: '2026-11-06 09:15',
     status: 'pending_review',
-    splTokenMint: 'sk1LLBlinkCampusActionMint22Vv89PqLm77J',
+    splTokenMint: 'CcTEkg3jaQrA1kJdGBG2nu7MyefDP1oUMA9hiWx282vk',
   },
   {
     id: 'sub-2',
     bountyId: 'bounty-3',
     bountyTitle: 'Anchor Escrow Smart Contract for Automated Hackathon Payouts',
     teamName: 'AnchorVault Lab',
-    builderAddress: '4KxM921Zp81MvQz81Tp2YqR8sW76P10vL8291M41',
+    builderAddress: 'GHRxE7YBCgA9nkNLAtn2MWVWaxScHVR4SJxMTorXFByC',
     githubPrUrl: 'https://github.com/solpulse-protocol/escrow-contract/pull/17',
     commitHash: 'c4e9120a',
     summary: 'Implemented Anchor PDA escrow vault with release_funds instruction. Zero-copy account layout reduces compute units to 14,200 CU per payout release.',
     solReward: 0.60,
     submittedAt: '2026-11-06 10:30',
     status: 'pending_review',
-    splTokenMint: 'sk1LLEscrowProgramAnchorVaultMint55Qx',
+    splTokenMint: 'HUQGGd3xjxbUxZ5KPVXUVg8hmBwHwHCtdsmLa7KZKLNo',
   },
   {
     id: 'sub-3',
     bountyId: 'bounty-4',
     bountyTitle: 'Integrate Chainstack Global RPC Nodes for Ultra-Low Latency Broadcasting',
     teamName: 'LatencyKillers',
-    builderAddress: '88Qx3P90VvM21Z9w8xK44Lp9xKy18MvQz81Tp2Yq',
+    builderAddress: '13LDsxsvkoyuFnewKFi5gzSQq5ggmtH8EmeHQTajBK2o',
     githubPrUrl: 'https://github.com/chainstacklabs/solana-failover-router/pull/9',
     commitHash: '77d291fa',
     summary: 'Benchmarked 500 consecutive transaction broadcasts on devnet. Chainstack Global Nodes achieved 320ms avg latency with zero dropped confirmations during network peak.',
     solReward: 0.40,
     submittedAt: '2026-11-06 11:45',
     status: 'pending_review',
-    splTokenMint: 'sk1LLChainstackGlobalNodeMint88Zp41Lp',
+    splTokenMint: '5xZenqSrpGjmCYzCrcKYK3if4U2fPr9q4mVNmGWApZou',
   },
   {
     id: 'sub-4',
     bountyId: 'bounty-1',
     bountyTitle: 'Audit Token-2022 Transfer Hook for Fee Deflation Invariants',
     teamName: 'ZeroDrain Security',
-    builderAddress: 'H5xjpFiAthMDCxBu7caAbG6z6EtVyENRoPCoGv6oRpiY',
+    builderAddress: 'BhXaWsyfVcfJRdpuBQ53scQfoyCuAvnRzM78eaAf2iAt',
     githubPrUrl: 'https://github.com/solpulse-builder/token-2022-audit/pull/91',
     commitHash: '99e41ba8',
     summary: 'Discovered and remediated a critical fee rounding vulnerability in transfer_hook. Added formal mathematical invariant proofs and 12 Anchor exploit unit tests.',
     solReward: 0.45,
     submittedAt: '2026-11-05 16:20',
     status: 'approved',
-    payoutTxHash: '5wKqZ2K99v1xLmQ8pT9sYqZ81MvQz81Tp2YqR8sW76P10vL8291M41Xy99Q5555abcdef123456789012345678',
-    splTokenMint: 'sk1LL2022SecAuditHookMint77Xz89PqLm44K',
+    payoutTxHash: '5itW4CpafDQ4nLHb2LJNST6hfMKY27Pnxg6Zrh8mmHKVG48cNSFbhAU1nFFjczqxFwZivjFS3UNZp6fSQxY7U9Mf',
+    splTokenMint: '2zxFsgijx4wAXPqQKPVh8AaJspu4R66bc72XS5FPseoX',
     autoConfirmed: true,
   },
 ];
 
 export const INITIAL_SPL_TOKENS: SplProofToken[] = [
   {
-    mintAddress: 'sk1LL2022SecAuditHookMint77Xz89PqLm44K',
+    mintAddress: '2zxFsgijx4wAXPqQKPVh8AaJspu4R66bc72XS5FPseoX',
     symbol: 'SKILL-AUDIT',
     name: 'Token-2022 Security Auditor',
     bountyTitle: 'Audit Token-2022 Transfer Hook for Fee Deflation Invariants',
-    recipientAddress: 'H5xjpFiAthMDCxBu7caAbG6z6EtVyENRoPCoGv6oRpiY',
+    recipientAddress: 'BhXaWsyfVcfJRdpuBQ53scQfoyCuAvnRzM78eaAf2iAt',
     mintedAt: '2026-11-05',
-    txHash: '5wKqZ2K99v1xLmQ8pT9sYqZ81MvQz81Tp2YqR8sW76P10vL8291M41Xy99Q5555abcdef123456789012345678',
+    txHash: '5itW4CpafDQ4nLHb2LJNST6hfMKY27Pnxg6Zrh8mmHKVG48cNSFbhAU1nFFjczqxFwZivjFS3UNZp6fSQxY7U9Mf',
     tier: 'Master',
     imageBadge: '/src/assets/images/builder_badge_emblem_1793978567156.jpg',
   },
   {
-    mintAddress: 'sk1LLEscrowProgramAnchorVaultMint55Qx',
+    mintAddress: 'HUQGGd3xjxbUxZ5KPVXUVg8hmBwHwHCtdsmLa7KZKLNo',
     symbol: 'SKILL-ANCHOR',
     name: 'Anchor Escrow Architect',
     bountyTitle: 'Anchor Escrow Smart Contract for Automated Hackathon Payouts',
-    recipientAddress: 'H5xjpFiAthMDCxBu7caAbG6z6EtVyENRoPCoGv6oRpiY',
+    recipientAddress: 'BhXaWsyfVcfJRdpuBQ53scQfoyCuAvnRzM78eaAf2iAt',
     mintedAt: '2026-11-02',
-    txHash: '4zR8sW76P10vL8291M41Xy99Q55555wKqZ2K99v1xLmQ8pT9sYqZ81MvQz81Tp2YqR8sW76P10vL8291M41Xy9',
+    txHash: '21YbhY2biBvMv1UibcxUeUNkTCdsr3LxvZkkdmaLKp3a2tAgTvkxMPwEZwg4C8JPYpb7JZkHj6uS3Y6YLhwGoRwF',
     tier: 'Expert',
     imageBadge: '/src/assets/images/builder_badge_emblem_1793978567156.jpg',
   },
@@ -327,10 +341,7 @@ export function calculateProtocolStats(bounties: Bounty[]) {
 }
 
 export function generateSplTokenMint(): string {
-  const chars = '123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz';
-  let mint = 'sk1LL';
-  for (let i = 0; i < 39; i++) {
-    mint += chars.charAt(Math.floor(Math.random() * chars.length));
-  }
+  const mint = VALID_DEVNET_MINTS[mintIndex % VALID_DEVNET_MINTS.length];
+  mintIndex++;
   return mint;
 }

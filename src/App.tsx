@@ -16,7 +16,6 @@ import { Marketplace } from './components/Marketplace';
 import { AnalyticsView } from './components/AnalyticsView';
 import { BuilderPassportView } from './components/BuilderPassportView';
 import { JudgePortal } from './components/JudgePortal';
-import { PitchDeckView } from './components/PitchDeckView';
 import { BountyDetailModal } from './components/BountyDetailModal';
 import { SubmitProofModal } from './components/SubmitProofModal';
 import { CreateBountyModal } from './components/CreateBountyModal';
@@ -67,7 +66,7 @@ export default function App() {
 
   // Builder Profile with SPL Soulbound Tokens (Slide 4, 6, 7)
   const [builderProfile, setBuilderProfile] = useState<BuilderProfile>({
-    address: '9xKy18MvQz81Tp2YqR8sW76P10vL8291M41Xy99Q5555',
+    address: 'BhXaWsyfVcfJRdpuBQ53scQfoyCuAvnRzM78eaAf2iAt',
     name: 'Solana Devnet Judge / Builder',
     avatarUrl: '/src/assets/images/builder_avatar_judge_1793978564709.jpg',
     level: 4,
@@ -83,26 +82,26 @@ export default function App() {
       {
         bountyId: 'bounty-1',
         bountyTitle: 'Audit Token-2022 Transfer Hook for Fee Deflation Invariants',
-        githubUrl: 'https://github.com/solpulse-builder/token-2022-audit/pull/91',
+        githubUrl: 'https://github.com/solana-labs/solana-program-library/tree/master/token-2022',
         notes: 'Verified fee split math, CPI recursion limits, and zero-remainder checks to prevent deflationary drain attacks.',
-        builderAddress: '9xKy18MvQz81Tp2YqR8sW76P10vL8291M41Xy99Q5555',
+        builderAddress: 'BhXaWsyfVcfJRdpuBQ53scQfoyCuAvnRzM78eaAf2iAt',
         submittedAt: '2026-11-05',
-        txSignature: '5wKqZ2K99v1xLmQ8pT9sYqZ81MvQz81Tp2YqR8sW76P10vL8291M41Xy99Q5555abcdef123456789012345678',
+        txSignature: '5itW4CpafDQ4nLHb2LJNST6hfMKY27Pnxg6Zrh8mmHKVG48cNSFbhAU1nFFjczqxFwZivjFS3UNZp6fSQxY7U9Mf',
         rewardSol: 0.35,
         verified: true,
-        splTokenMint: 'sk1LL2022SecAuditHookMint77Xz89PqLm44K',
+        splTokenMint: '2zxFsgijx4wAXPqQKPVh8AaJspu4R66bc72XS5FPseoX',
       },
       {
         bountyId: 'bounty-3',
         bountyTitle: 'Anchor Escrow Smart Contract for Automated Hackathon Payouts',
         githubUrl: 'https://github.com/coral-xyz/anchor',
         notes: 'Constructed PDA escrow vault with release_funds instruction.',
-        builderAddress: '9xKy18MvQz81Tp2YqR8sW76P10vL8291M41Xy99Q5555',
+        builderAddress: 'BhXaWsyfVcfJRdpuBQ53scQfoyCuAvnRzM78eaAf2iAt',
         submittedAt: '2026-11-02',
-        txSignature: '4zR8sW76P10vL8291M41Xy99Q55555wKqZ2K99v1xLmQ8pT9sYqZ81MvQz81Tp2YqR8sW76P10vL8291M41Xy9',
+        txSignature: '21YbhY2biBvMv1UibcxUeUNkTCdsr3LxvZkkdmaLKp3a2tAgTvkxMPwEZwg4C8JPYpb7JZkHj6uS3Y6YLhwGoRwF',
         rewardSol: 0.20,
         verified: true,
-        splTokenMint: 'sk1LLEscrowProgramAnchorVaultMint55Qx',
+        splTokenMint: 'HUQGGd3xjxbUxZ5KPVXUVg8hmBwHwHCtdsmLa7KZKLNo',
       },
     ],
   });
@@ -405,7 +404,7 @@ export default function App() {
             ? {
                 ...b,
                 status: 'Completed',
-                claimedBy: wallet.address || 'JudgeBuilder',
+                claimedBy: wallet.address || 'BhXaWsyfVcfJRdpuBQ53scQfoyCuAvnRzM78eaAf2iAt',
                 claimTxHash: txSignature,
                 claimedAt: new Date().toISOString().slice(0, 10),
               }
@@ -557,13 +556,6 @@ export default function App() {
             onConnectDemoWallet={handleConnectDemoWallet}
           />
         )}
-
-        {activeTab === 'deck' && (
-          <PitchDeckView
-            onGoToJudgePortal={() => setActiveTab('judge')}
-            onGoToMarketplace={() => setActiveTab('marketplace')}
-          />
-        )}
       </main>
 
       {/* Footer */}
@@ -576,14 +568,14 @@ export default function App() {
           </div>
 
           <div className="flex items-center gap-6 font-mono text-[11px]">
-            <span className="text-emerald-400">Cluster: Devnet</span>
-            <span>·</span>
-            <button
-              onClick={() => setActiveTab('deck')}
-              className="text-purple-400 hover:text-purple-300 cursor-pointer"
+            <a
+              href="https://solpulse-rs.vercel.app/"
+              target="_blank"
+              rel="noreferrer"
+              className="text-[#14F195] hover:underline transition-colors"
             >
-              Pitch Deck Slides (PDF)
-            </button>
+              solpulse-rs.vercel.app ↗
+            </a>
             <span>·</span>
             <a
               href="https://explorer.solana.com/?cluster=devnet"

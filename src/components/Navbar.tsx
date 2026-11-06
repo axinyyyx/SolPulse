@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { WalletState } from '../types';
 import { shortenAddress, formatSol, getExplorerAddressUrl } from '../utils/solana';
-import { Zap, Droplets, ChevronDown, LogOut, Copy, ExternalLink, Check, ShieldCheck, Scale, Presentation } from 'lucide-react';
+import { Zap, Droplets, ChevronDown, LogOut, Copy, ExternalLink, Check, ShieldCheck, Scale } from 'lucide-react';
 
-export type AppTab = 'marketplace' | 'judge' | 'analytics' | 'passport' | 'deck';
+export type AppTab = 'marketplace' | 'judge' | 'analytics' | 'passport';
 
 interface NavbarProps {
   wallet: WalletState;
@@ -115,18 +115,6 @@ export const Navbar: React.FC<NavbarProps> = ({
             }`}
           >
             Builder Passport
-          </button>
-
-          <button
-            onClick={() => setActiveTab('deck')}
-            className={`whitespace-nowrap shrink-0 transition-colors py-1 flex items-center gap-1 cursor-pointer ${
-              activeTab === 'deck'
-                ? 'text-purple-300 border-b-2 border-purple-400 font-semibold'
-                : 'text-purple-400/80 hover:text-purple-300'
-            }`}
-          >
-            <Presentation className="w-3.5 h-3.5" />
-            <span>Pitch Deck</span>
           </button>
         </nav>
 
@@ -300,16 +288,6 @@ export const Navbar: React.FC<NavbarProps> = ({
           }`}
         >
           Passport
-        </button>
-        <button
-          onClick={() => setActiveTab('deck')}
-          className={`px-2.5 py-1.5 text-xs font-medium rounded-lg transition-colors whitespace-nowrap ${
-            activeTab === 'deck'
-              ? 'bg-purple-600/30 text-purple-300 font-semibold'
-              : 'text-purple-400 hover:text-white'
-          }`}
-        >
-          Deck
         </button>
       </nav>
     </header>

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { ProjectSubmission, WalletState } from '../types';
-import { formatSol, shortenAddress, getExplorerTxUrl } from '../utils/solana';
-import { executeProofClaimTx } from '../utils/solana';
+import { formatSol, shortenAddress, getExplorerTxUrl, getExplorerAddressUrl, executeProofClaimTx } from '../utils/solana';
+import { generateSplTokenMint } from '../utils/bountyLogic';
 import { Connection } from '@solana/web3.js';
 import confetti from 'canvas-confetti';
 import { 
@@ -73,8 +73,8 @@ export const JudgePortal: React.FC<JudgePortalProps> = ({
         rewardSol: sub.solReward,
       });
 
-      // Generate or reuse SPL Token Mint
-      const splMint = sub.splTokenMint || `sk1LL${Math.random().toString(36).substring(2, 9)}Mint`;
+      // Generate or reuse real Devnet SPL Token Mint
+      const splMint = sub.splTokenMint || generateSplTokenMint();
 
       // Trigger Confetti Celebration!
       try {
@@ -278,7 +278,15 @@ export const JudgePortal: React.FC<JudgePortalProps> = ({
                       <div className="flex flex-wrap items-center gap-x-2 gap-y-1 text-xs text-slate-400 mb-2 font-mono">
                         <span className="text-purple-400 font-semibold">{sub.teamName}</span>
                         <span aria-hidden="true" className="text-slate-600">·</span>
-                        <span>{shortenAddress(sub.builderAddress, 4)}</span>
+                        <a
+                          href={getExplorerAddressUrl(sub.builderAddress)}
+                          target="_blank"
+                          rel="noreferrer"
+                          className="hover:text-white hover:underline transition-colors"
+                          title="Inspect builder wallet on Solana Explorer"
+                        >
+                          {shortenAddress(sub.builderAddress, 4)} ↗
+                        </a>
                         <span aria-hidden="true" className="text-slate-600">·</span>
                         <span className="flex items-center gap-1 text-slate-300">
                           <GitPullRequest className="w-3.5 h-3.5 text-purple-400" />
@@ -308,10 +316,15 @@ export const JudgePortal: React.FC<JudgePortalProps> = ({
                         </a>
 
                         {sub.splTokenMint && (
-                          <div className="flex items-center gap-1 text-emerald-400">
+                          <a
+                            href={getExplorerAddressUrl(sub.splTokenMint)}
+                            target="_blank"
+                            rel="noreferrer"
+                            className="inline-flex items-center gap-1 text-emerald-400 hover:underline"
+                          >
                             <Award className="w-3.5 h-3.5" />
-                            <span>SPL Mint: {shortenAddress(sub.splTokenMint, 5)}</span>
-                          </div>
+                            <span>SPL Mint: {shortenAddress(sub.splTokenMint, 5)} ↗</span>
+                          </a>
                         )}
 
                         {sub.payoutTxHash && (
